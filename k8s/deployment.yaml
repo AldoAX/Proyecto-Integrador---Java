@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: retailorder-deployment
+  labels:
+    app: retailorder
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: retailorder
+  template:
+    metadata:
+      labels:
+        app: retailorder
+    spec:
+      containers:
+        - name: retailorder-container
+          image: retailorder-service:v1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: retailorder-config
+            - secretRef:
+                name: retailorder-secret
+          volumeMounts:
+            - mountPath: "/app/logs"
+              name: logs-storage
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: logs-storage
+          persistentVolumeClaim:
+            claimName: retailorder-pvc

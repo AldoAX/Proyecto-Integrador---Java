@@ -1,5 +1,12 @@
 # RetailOrder Service — Kubernetes (Docker Desktop)
 
+Ejecuta los comandos desde la raíz del proyecto, `Proyecto-Integrador---Java`.
+Si tu terminal está en la carpeta contenedora `retailservice`, primero ejecuta:
+
+```sh
+cd Proyecto-Integrador---Java
+```
+
 ## Prerrequisitos
 - Docker Desktop instalado con Kubernetes habilitado
   Settings > Kubernetes > Enable Kubernetes > Apply & Restart
@@ -15,7 +22,7 @@ Desde la raíz del proyecto:
 
 ```sh
 docker build -t retailorder-service:v1.0 .
-docker images | grep retailorder
+docker images | findstr retailorder
 ```
 
 NOTA: En Docker Desktop no es necesario hacer push.
